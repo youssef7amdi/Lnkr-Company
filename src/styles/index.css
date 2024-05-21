@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    /* Creating animations for dark mode */
+    transition:
+      background-color 0.3s,
+      border 0.3s;
+  }
+  html {
+    font-size: 62.5%;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-gray-700);
+
+    transition:
+      color 0.3s,
+      background-color 0.3s;
+    min-height: 100vh;
+    line-height: 1.5;
+    font-size: 1.6rem;
+  }
+}
+
+.nav-link:link,
+.nav-link:visited {
+  @apply flex items-center gap-[1.2rem]  text-gray-600 transition-all duration-300;
+}
+.main-nav-link:link,
+.main-nav-link:visited {
+  @apply px-[2.4rem] py-[1.2rem] text-[1.6rem] font-[500];
+}
+.other-nav-link:link,
+.other-nav-link:visited {
+  @apply px-[1.6rem] py-[0.8rem] text-[1.2rem] font-[500];
+}
+
+.nav-link:hover,
+.nav-link:active,
+.nav-link.active:link,
+.nav-link.active:visited {
+  @apply rounded-[5px] bg-gray-50 text-gray-800;
+}
+
+.main-nav-link svg {
+  @apply h-[2.4rem] w-[2.4rem] text-gray-400 transition-all duration-300;
+}
+.other-nav-link svg {
+  @apply h-[1.6rem] w-[1.6rem] text-gray-400 transition-all duration-300;
+}
+
+.nav-link:hover svg,
+.nav-link:active svg,
+.nav-link.active:link svg,
+.nav-link.active:visited svg {
+  @apply text-brand-600;
+}
+
+.spinner {
+  background:
+    radial-gradient(farthest-side, #4f46e5 94%, #0000) top/10px 10px no-repeat,
+    conic-gradient(#0000 30%, #4f46e5);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+}
