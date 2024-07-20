@@ -1,4 +1,14 @@
-function InputField({ register, error, id, type, disabled, children }) {
+function InputField({
+  register,
+  error,
+  id,
+  min,
+  type,
+  placeholder,
+  disabled,
+  step = null,
+  children,
+}) {
   return (
     <div className="flex w-full flex-col gap-[0.8rem]">
       {id && (
@@ -13,6 +23,9 @@ function InputField({ register, error, id, type, disabled, children }) {
         id={id}
         type={type}
         disabled={disabled}
+        min={min}
+        step={step}
+        placeholder={placeholder}
         className={`rounded-[7px] border border-gray-300 px-[1.2rem] py-[0.8rem] shadow-sm  ${error ? 'outline-red-600' : 'focus:outline-brand-700'} `}
         {...register}
       />

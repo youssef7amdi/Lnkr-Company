@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import InputField from '../../../ui/InputField';
 import SettingsFormBox from '../../../ui/SettingsFormBox';
 import { settings } from '../../../data/data';
-import Select from '../../../ui/Select';
+import SelectFilter from '../../../ui/SelectFilter';
 import { useState } from 'react';
 
 const genderOptions = [
@@ -53,7 +53,7 @@ function ProfileSettings() {
         />
       </div>
       <div className="flex  items-center gap-[3.2rem]">
-        <Select
+        <SelectFilter
           id="Gender"
           disabled={!isEditable}
           register={register('gender')}

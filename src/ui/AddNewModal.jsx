@@ -1,20 +1,17 @@
-import { useParams } from 'react-router-dom';
 import Button from './Button';
 import Modal from './Modal';
 
-function AddNewModal({ buttonLabel, children }) {
-  const { dataToShow } = useParams();
-
+function AddNewModal({ modalLabel, buttonLabel, children }) {
   return (
     <Modal>
-      <Modal.Open opens={`${dataToShow}`}>
+      <Modal.Open opens={`${modalLabel}`}>
         <Button type="button" sort="primary">
           {buttonLabel}
         </Button>
       </Modal.Open>
 
       <Modal.Window
-        name={`${dataToShow}`}
+        name={`${modalLabel}`}
         minWidth="min-w-[90rem]"
         height="h-5/6"
         overflow="overflow-auto"

@@ -10,10 +10,10 @@ function DataShowingLayout({
   children,
 }) {
   return (
-    <section className="border-radius self-stretch overflow-hidden rounded-[7px] border border-gray-100 bg-white">
+    <section className="border-radius self-stretch rounded-[7px] border border-gray-100 bg-white">
       <DataShowingHeader icon={headingIcon} heading={heading} />
       <main className="px-[4rem] pb-[1.2rem] pt-[3.2rem]">
-        <div className="mb-[1.6rem] flex flex-wrap gap-[1.2rem] text-gray-500">
+        <div className="mb-[1.6rem] flex flex-wrap  gap-[1.2rem] text-gray-500">
           {children}
         </div>
         {highlightLabel && (

@@ -1,4 +1,5 @@
 import SignUpForm from '../features/authentication/SignUpForm';
+
 import RegistrationLayout from '../ui/RegistrationLayout';
 
 function SignUp() {

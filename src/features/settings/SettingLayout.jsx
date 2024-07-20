@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom';
 import SortBy from '../../ui/SortBy';
-import Filter from '../../ui/Filter';
 import { useEffect, useState } from 'react';
 import PhysicianSettings from './PhysicianSettings';
 import ClinicSettings from './ClinicSettings';
 import ManageCards from './ManageCards';
+import FilterWithQueries from '../../ui/FilterWithQueries';
 
 const settingCategories = [
   {
@@ -56,7 +56,7 @@ function SettingLayout() {
       <div className="flex items-center justify-between">
         <h1 className="text-[3rem] font-semibold">{settingCategory}</h1>
         <div className="flex items-center gap-[1.6rem]">
-          <Filter options={filterOptions} filterField="item" />
+          <FilterWithQueries options={filterOptions} filterField="item" />
           <SortBy options={settingCategories} sortField="category" />
         </div>
       </div>

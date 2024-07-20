@@ -1,6 +1,7 @@
-import { Navigate, useSearchParams } from 'react-router-dom';
-import Select from './Select';
 import { useEffect } from 'react';
+import { Navigate, useSearchParams } from 'react-router-dom';
+
+import SelectFilter from './SelectFilter';
 
 function SortBy({ options, sortField }) {
   const valuesArr = options.reduce((acc, cur) => {
@@ -9,7 +10,11 @@ function SortBy({ options, sortField }) {
   }, []);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentSortBy = searchParams.get(sortField) || options.at(0).value;
+  const currentSortByOption = options.find((option) => {
+    if (searchParams.get(sortField))
+      return option.value == searchParams.get(sortField);
+    else return options.at(0);
+  });
 
   useEffect(function () {
     if (!searchParams.get(sortField)) {
@@ -19,20 +24,20 @@ function SortBy({ options, sortField }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!valuesArr.includes(currentSortBy))
+  if (!valuesArr.includes(currentSortByOption.value))
     return <Navigate replace to={'/404'} />;
 
-  function handleChange(e) {
-    searchParams.set(sortField, e.target.value);
+  function handleChange(option) {
+    searchParams.set(sortField, option.value);
     if (searchParams.get('item')) searchParams.delete('item');
     setSearchParams(searchParams);
   }
 
   return (
-    <Select
+    <SelectFilter
       options={options}
-      onChange={(e) => handleChange(e)}
-      value={currentSortBy}
+      onChange={(option) => handleChange(option)}
+      value={currentSortByOption}
     />
   );
 }

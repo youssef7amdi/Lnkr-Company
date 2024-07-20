@@ -1,7 +1,5 @@
 import { createContext, useContext } from 'react';
 
-// TODO: edit rowGrid and columns to be accessible at row.
-
 export const TableContext = createContext();
 
 function Table({ columns, children }) {
@@ -41,9 +39,15 @@ function Body({ data, render }) {
   return <section className="">{data.map(render)}</section>;
 }
 
-function Row({ children }) {
+function Row({ onClick, children }) {
+  const { columns, rowGrid } = useContext(TableContext);
+
   return (
-    <div role="row" className="border-b border-gray-100 last:border-none">
+    <div
+      role="row"
+      className={`${rowGrid} ${columns} border-b border-gray-100 px-[2.4rem] py-[1.2rem] last:border-none ${onClick ? ' cursor-pointer hover:bg-gray-100' : ''}`}
+      onClick={onClick ? onClick : null}
+    >
       {children}
     </div>
   );

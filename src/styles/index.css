@@ -28,6 +28,35 @@
     min-height: 100vh;
     line-height: 1.5;
     font-size: 1.6rem;
+    --sb-track-color: #eef2ff;
+    --sb-thumb-color: #4f46e5;
+    --sb-size: 9px;
+  }
+
+  ::-webkit-scrollbar {
+    width: var(--sb-size);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #e0e7ff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4338ca;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
   }
 }
 
