@@ -13,6 +13,20 @@ import { MdPayments } from 'react-icons/md';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { CgMoreVerticalO } from 'react-icons/cg';
 
+const mainLinks = [
+  { to: 'dashboard', icon: <HiOutlineHome /> },
+  { to: 'patient', icon: <HiSearchCircle /> },
+  { to: 'contracts', icon: <HiDocumentDuplicate /> },
+  { to: 'settings', icon: <HiOutlineCog6Tooth /> },
+];
+
+const otherLinks = [
+  { to: 'visits', icon: <FaPersonWalking /> },
+  { to: 'monthly-reports', icon: <HiDocumentReport /> },
+  { to: 'Dues', icon: <TbCalendarDue /> },
+  { to: 'payments', icon: <MdPayments /> },
+];
+
 const otherPath = otherLinks.map((link) => link.to);
 
 function MainNav() {
@@ -80,17 +94,3 @@ function MainNav() {
 }
 
 export default MainNav;
-
-var mainLinks = [
-  { to: 'dashboard', icon: <HiOutlineHome /> },
-  { to: 'patient', icon: <HiSearchCircle /> },
-  { to: 'contracts', icon: <HiDocumentDuplicate /> },
-  { to: 'settings', icon: <HiOutlineCog6Tooth /> },
-];
-
-var otherLinks = [
-  { to: 'visits', icon: <FaPersonWalking /> },
-  { to: 'monthly-reports', icon: <HiDocumentReport /> },
-  { to: 'Dues', icon: <TbCalendarDue /> },
-  { to: 'payments', icon: <MdPayments /> },
-];
