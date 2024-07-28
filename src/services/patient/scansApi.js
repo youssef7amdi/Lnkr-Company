@@ -2,9 +2,9 @@ import { BASE_URL } from '../../environment/environment';
 
 // reports
 
-export async function getScans({ accessToken, page = 1, query = null }) {
+export async function getScans({ accessToken, page = 1, query = null, type }) {
   const res = await fetch(
-    `${BASE_URL}dentist/scan?page=${page}${query ? '&q=' + query : ''}`,
+    `${BASE_URL}dentist/scan_${type}?page=${page}${query ? '&q=' + query : ''}`,
     {
       method: 'GET',
       headers: {
@@ -48,7 +48,7 @@ export async function getScanAssets({ category, accessToken }) {
 // set reports
 export async function requestScan(newScanObj, accessToken) {
   console.log(JSON.stringify(newScanObj));
-  const res = await fetch(`${BASE_URL}dentist/scan`, {
+  const res = await fetch(`${BASE_URL}dentist/scan_request`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',

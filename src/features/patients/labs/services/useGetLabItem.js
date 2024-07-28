@@ -14,7 +14,7 @@ export function useGetLabItem(query) {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['lab_item', id, query, type],
+    queryKey: [`lab_item_${type ? type : 'result'}`, id, query],
     queryFn: () => getLabs({ query, accessToken, type }),
     retry: 0,
     staleTime: 1000 * 1000,

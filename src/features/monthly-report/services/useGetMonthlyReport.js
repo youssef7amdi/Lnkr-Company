@@ -3,16 +3,17 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useCookiesAccess } from '../../../contexts/CookiesAccessProvider';
 
-import { getVisits } from '../../../services/more/visitsApi';
+import { getMonthlyReport } from '../../../services/more/monthlyReportApi';
 
-export function useGetVisits() {
+export function useGetMonthlyReport() {
   const { getCookie, removeCookie } = useCookiesAccess();
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['visits'],
-    queryFn: () => getVisits({ accessToken }),
+    queryKey: ['monthly-report', accessToken],
+    queryFn: () => getMonthlyReport({ accessToken }),
     retry: 0,
+    staleTime: 1000 * 1000000,
   });
 
   useEffect(
@@ -28,5 +29,5 @@ export function useGetVisits() {
     [error, removeCookie],
   );
 
-  return { data: data ? data.data : [], error, isLoading };
+  return { data, error, isLoading };
 }

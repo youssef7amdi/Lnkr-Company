@@ -9,6 +9,7 @@ import Error from '../../../ui/Error';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import Button from '../../../ui/Button';
+import FilterWithQueries from '../../../ui/FilterWithQueries';
 
 function Scans() {
   const [searchParams] = useSearchParams();
@@ -25,21 +26,30 @@ function Scans() {
 
   return (
     <>
-      <DataShowingLayout heading={`Scans`}>
+      <DataShowingLayout
+        heading={
+          <div className="flex w-full items-center justify-between">
+            <span>Scans</span>
+            <FilterWithQueries filterField={'type'} options={options} />
+          </div>
+        }
+      >
         {searchParams.has('q') ? (
           <ScanItem />
         ) : (
           <>
-            <div className="mb-6 flex h-[4rem] w-full">
-              <Button type="button" sort="primary" onClick={handleClick}>
-                Request New Scan
-              </Button>
-            </div>
+            {searchParams.get('type') === 'request' && (
+              <div className="mb-6 flex h-[4rem] w-full">
+                <Button type="button" sort="primary" onClick={handleClick}>
+                  Request New Scan
+                </Button>
+              </div>
+            )}
             <div className="grow">
               <Table columns="grid-cols-[1fr_1fr]">
                 <Table.Header>
                   <div>Created At</div>
-                  <div>Scan name</div>
+                  {scans.at(0).scan_name && <div>Scan name</div>}
                 </Table.Header>
 
                 <Table.Body
@@ -71,9 +81,16 @@ function ScanRow({ scan }) {
       <div className="font-[sono] text-[1.4rem] font-[500] text-gray-600">
         {scan.created_date}
       </div>
-      <div className="font-[sono] text-[1.4rem] font-[500] capitalize text-gray-700">
-        {scan.scan_name}
-      </div>
+      {scan.scan_name && (
+        <div className="font-[sono] text-[1.4rem] font-[500] capitalize text-gray-700">
+          {scan.scan_name}
+        </div>
+      )}
     </Table.Row>
   );
 }
+
+var options = [
+  { label: 'Results', value: 'imaging' },
+  { label: 'Requests', value: 'request' },
+];

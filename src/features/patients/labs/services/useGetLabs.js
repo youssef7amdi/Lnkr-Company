@@ -14,9 +14,10 @@ export function useLabs() {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: [`labs`, id, type ? type : 'result'],
+    queryKey: [`labs_${type ? type : 'result'}`, id],
     queryFn: () => getLabs({ accessToken, type: type ? type : 'result' }),
     retry: 0,
+    staleTime: 1000 * 10,
   });
 
   useEffect(

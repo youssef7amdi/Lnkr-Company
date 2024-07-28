@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { useCookiesAccess } from '../../../contexts/CookiesAccessProvider';
 
-import { getVisits } from '../../../services/settings/visitsApi';
+import { getVisits } from '../../../services/more/visitsApi';
 
 export function useGetVisitsItem(query) {
   const { getCookie, removeCookie } = useCookiesAccess();

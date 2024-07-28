@@ -53,9 +53,8 @@ function SettingLayout() {
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <h1 className="text-[3rem] font-semibold">{settingCategory}</h1>
-        <div className="flex items-center gap-[1.6rem]">
+      <div className="flex items-center justify-end">
+        <div className=" flex items-center gap-[1.6rem]">
           <FilterWithQueries options={filterOptions} filterField="item" />
           <SortBy options={settingCategories} sortField="category" />
         </div>

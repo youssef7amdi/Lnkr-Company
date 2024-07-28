@@ -3,19 +3,19 @@ import { useEffect } from 'react';
 
 import { useCookiesAccess } from '../../../../../contexts/CookiesAccessProvider';
 
-import { getClinicTitleAssets } from '../../../../../services/settings/clinicApi';
+import { getProfileTitleAssets } from '../../../../../services/settings/physicianApi';
 
-export function useGetClinicTitleAssets() {
+export function useGetProfileTitleAssets() {
   const { getCookie, removeCookie } = useCookiesAccess();
   const accessToken = getCookie('access_token');
 
   const {
     data,
-    isLoading: clinicTitleAssetsLoading,
+    isLoading: profileTitleAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`clinic_title_assets`],
-    queryFn: () => getClinicTitleAssets(accessToken),
+    queryKey: [`profile_title_assets`],
+    queryFn: () => getProfileTitleAssets(accessToken),
     retry: 0,
     staleTime: 1000 * 1000000,
   });
@@ -33,5 +33,5 @@ export function useGetClinicTitleAssets() {
     [error, removeCookie],
   );
 
-  return { data: data ? data.data : [], error, clinicTitleAssetsLoading };
+  return { data: data ? data.data : [], error, profileTitleAssetsLoading };
 }

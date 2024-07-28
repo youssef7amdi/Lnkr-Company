@@ -17,7 +17,7 @@ export function useGetChoicesOptions() {
     queryKey: [`choices_assets`],
     queryFn: () => getChoicesAssets(accessToken),
     retry: 0,
-    staleTime: 1000 * 10000,
+    staleTime: 1000 * 1000000,
   });
 
   useEffect(

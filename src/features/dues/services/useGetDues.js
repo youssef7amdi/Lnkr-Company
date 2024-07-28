@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useCookiesAccess } from '../../../contexts/CookiesAccessProvider';
 
-import { getDues } from '../../../services/settings/duesApi';
+import { getDues } from '../../../services/more/duesApi';
 
 export function useGetDues() {
   const { getCookie, removeCookie } = useCookiesAccess();

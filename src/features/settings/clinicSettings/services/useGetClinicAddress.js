@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
-import { useCookiesAccess } from '../../../contexts/CookiesAccessProvider';
+import { useCookiesAccess } from '../../../../contexts/CookiesAccessProvider';
 
-import { getVisits } from '../../../services/more/visitsApi';
+import { getClinicAddressInfo } from '../../../../services/settings/clinicApi';
 
-export function useGetVisits() {
+export function useGetClinicAddress() {
   const { getCookie, removeCookie } = useCookiesAccess();
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['visits'],
-    queryFn: () => getVisits({ accessToken }),
+    queryKey: ['clinic_address'],
+    queryFn: () => getClinicAddressInfo(accessToken),
     retry: 0,
   });
 
@@ -28,5 +28,5 @@ export function useGetVisits() {
     [error, removeCookie],
   );
 
-  return { data: data ? data.data : [], error, isLoading };
+  return { data: data?.data, error, isLoading };
 }

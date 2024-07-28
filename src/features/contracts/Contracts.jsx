@@ -35,10 +35,7 @@ function Contracts() {
                 <Table.Body
                   data={contracts}
                   render={(contract) => (
-                    <ContractRow
-                      key={contract.created_date}
-                      contract={contract}
-                    />
+                    <ContractRow key={contract.uuid} contract={contract} />
                   )}
                 />
               </Table>

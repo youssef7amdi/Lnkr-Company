@@ -28,7 +28,6 @@ function LoginForm() {
   const { errors } = formState;
 
   function onSubmit({ mobile, password }) {
-    console.log(searchOption.value + mobile.replace(/\s+/g, ''), password);
     login({
       mobile: searchOption.value + mobile.replace(/\s+/g, ''),
       password,

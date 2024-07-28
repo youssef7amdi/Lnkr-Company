@@ -11,7 +11,6 @@ function LabInput({ control, name, id, isLoading, disabled, category, error }) {
   const [nameDisabled, setNameDisabled] = useState(true);
 
   const { data, labAssetsLoading } = useGetLabAssets(category?.value);
-  console.log(labAssetsLoading);
   let options = (function () {
     if (typeof data.at(0) == 'string') {
       return createOptionsFromArray(data);

@@ -18,7 +18,9 @@ function AddPrescriptionForm() {
     mode: 'onSubmit',
     shouldFocusError: true,
     defaultValues: {
-      diagnosis: [{}],
+      diagnosis: [
+        { general_diagnosis: null, detailed_diagnosis: null, icd: null },
+      ],
       prescribed_drug: [
         {
           dose: 1,
@@ -34,17 +36,17 @@ function AddPrescriptionForm() {
 
   function onSubmit(data) {
     const prescriptionObj = {
-      diagnosis: data.diagnosis
+      diagnosis: data.diagnosis.at(0).general_diagnosis
         ? data.diagnosis.map((item) => {
             return {
-              general_diagnosis: item.general_diagnosis.value,
-              detailed_diagnosis: item.detailed_diagnosis.value
+              general_diagnosis: item.general_diagnosis?.value,
+              detailed_diagnosis: item.detailed_diagnosis?.value
                 .split(' - ')
                 .at(0),
-              icd: item.detailed_diagnosis.value.split(' - ').at(1),
+              icd: item.detailed_diagnosis?.value.split(' - ').at(1),
             };
           })
-        : null,
+        : [],
       disease: '',
       general_comment: data?.general_comment,
       prescribed_drug: data.prescribed_drug.map((drug) => {
@@ -60,6 +62,7 @@ function AddPrescriptionForm() {
         };
       }),
     };
+
     setPrescriptionFn(prescriptionObj, {
       onSuccess: () => navigate(-1),
     });

@@ -38,11 +38,13 @@ function Labs() {
           <LabItem />
         ) : (
           <>
-            <div className="mb-6 flex h-[4rem] w-full">
-              <Button type="button" sort="primary" onClick={handleClick}>
-                Request New Lab
-              </Button>
-            </div>
+            {searchParams.get('type') === 'request' && (
+              <div className="mb-6 flex h-[4rem] w-full">
+                <Button type="button" sort="primary" onClick={handleClick}>
+                  Request New Lab
+                </Button>
+              </div>
+            )}
             <div className="grow">
               <Table columns="grid-cols-[1fr_1fr]">
                 <Table.Header>

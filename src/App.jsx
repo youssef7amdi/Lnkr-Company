@@ -13,7 +13,7 @@ import SearchPatient from './features/patients/search/SearchPatient';
 import Settings from './pages/Settings';
 import ContractsPage from './pages/ContractsPage';
 import VisitsPage from './pages/VisitsPage';
-import MonthlyReports from './pages/MonthlyReports';
+import MonthlyReportsPage from './pages/MonthlyReportsPage';
 import DuesPage from './pages/DuesPage';
 import Payments from './pages/Payments';
 import PageNotFound from './pages/PageNotFound';
@@ -99,7 +99,7 @@ function App() {
                 <Route path=":settingCategory" element={<SettingLayout />} />
               </Route>
               <Route path="visits" element={<VisitsPage />} />
-              <Route path="monthly-reports" element={<MonthlyReports />} />
+              <Route path="monthly-reports" element={<MonthlyReportsPage />} />
               <Route path="dues" element={<DuesPage />} />
               <Route path="payments" element={<Payments />} />
             </Route>
