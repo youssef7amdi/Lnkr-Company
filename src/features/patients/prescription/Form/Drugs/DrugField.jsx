@@ -26,19 +26,20 @@ function DrugField({ control, errors, register, isSubmitting }) {
         Drugs:
       </h3>
       <div className="p grid grid-cols-[70px_1.5fr_2.5fr_40px_40px] gap-[1.4rem] px-[1.8rem] py-[1rem] text-[1.2rem]">
-        <span className="w-[70px]">Quantity*</span>
+        <span className="">Quantity*</span>
         <span>Drug Name *</span>
         <div className="flex items-center gap-[0.5rem]">
           <span className="w-[70px]">Dose*</span>
-          <span className="w-[10px]"></span>
+          <span className="basis-[10px]"></span>
           <span className="w-[70px]">Frequency*</span>
-          <span className="w-[28px]"></span>
-          <span>Frequency choice*</span>
-          <span className="w-[25px]"></span>
+          <span className="basis-[28px]"></span>
+          <span className="grow">Frequency choice*</span>
+          <span className="basis-[28px]"></span>
           <span className="w-[70px]">Duration*</span>
-          <span>Duration Choice*</span>
-          <span className="w-[7px]"></span>
+          <span className="grow">Duration Choice*</span>
         </div>
+        <span></span>
+        <span></span>
       </div>
       <div className="p grid grid-cols-[70px_1.5fr_2.5fr_40px_40px] gap-[1.4rem] px-[1.8rem] pb-[1rem]">
         {drugFields.map((field, index) => (

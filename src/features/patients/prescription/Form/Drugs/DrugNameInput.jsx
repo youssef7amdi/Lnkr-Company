@@ -59,6 +59,7 @@ function DrugNameInput({ index, control, isLoading, disabled, errors }) {
                     ? '0 0 0 1px red'
                     : '0 0 0 1px #2684FF'
                   : { ...baseStyle.boxShadow },
+                fontSize: '1.4rem',
               }),
             }}
             cacheOptions
