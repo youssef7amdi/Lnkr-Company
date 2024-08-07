@@ -10,10 +10,15 @@ import Error from '../../../ui/Error';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import AddNewModal from '../../../ui/AddNewModal';
+import Pagination from '../../../ui/Pagination';
 
 function MedicalHistory() {
   const [searchParams] = useSearchParams();
-  const { data: medicalHistories, error, isLoading } = useGetMedicalHistory();
+  const {
+    data: { data: medicalHistories, page, total },
+    error,
+    isLoading,
+  } = useGetMedicalHistory();
 
   if (isLoading) return <Spinner />;
   if (!medicalHistories)
@@ -51,6 +56,10 @@ function MedicalHistory() {
                     />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>

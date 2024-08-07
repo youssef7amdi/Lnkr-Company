@@ -14,7 +14,7 @@ export function useGetClinicTitleAssets() {
     isLoading: clinicTitleAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`clinic_title_assets`],
+    queryKey: [`clinic_title_assets`, accessToken],
     queryFn: () => getClinicTitleAssets(accessToken),
     retry: 0,
     staleTime: 1000 * 1000000,

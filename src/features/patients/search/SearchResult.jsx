@@ -48,7 +48,7 @@ function SearchResult({ searchData }) {
           type="button"
           sort="primary"
           onClick={handleAccessProfile}
-          disabled={!service || chooseServiceLoading}
+          disabled={service ? !service.value : !service || chooseServiceLoading}
         >
           Access Profile
         </Button>

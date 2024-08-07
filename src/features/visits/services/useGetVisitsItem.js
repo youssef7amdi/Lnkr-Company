@@ -10,7 +10,7 @@ export function useGetVisitsItem(query) {
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['visits_item', query],
+    queryKey: ['visits_item', query, accessToken],
     queryFn: () => getVisits({ accessToken, query }),
     retry: 0,
     staleTime: 1000 * 1000,

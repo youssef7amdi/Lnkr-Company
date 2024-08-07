@@ -10,10 +10,15 @@ import Error from '../../../ui/Error';
 import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import AddNewModal from '../../../ui/AddNewModal';
+import Pagination from '../../../ui/Pagination';
 
 function VitalData() {
   const [searchParams] = useSearchParams();
-  const { data: vitals, error, isLoading } = useGetVitalData();
+  const {
+    data: { data: vitals, page, total },
+    error,
+    isLoading,
+  } = useGetVitalData();
 
   if (isLoading) return <Spinner />;
   if (!vitals) return <Error>No Vital Signs, Add vitals to show.</Error>;
@@ -52,6 +57,10 @@ function VitalData() {
                     />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>

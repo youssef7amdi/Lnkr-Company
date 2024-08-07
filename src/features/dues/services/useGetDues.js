@@ -10,7 +10,7 @@ export function useGetDues() {
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['dues'],
+    queryKey: ['dues', accessToken],
     queryFn: () => getDues({ accessToken }),
     retry: 0,
   });

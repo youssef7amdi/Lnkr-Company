@@ -8,10 +8,15 @@ import DataShowingLayout from '../../ui/DataShowingLayout';
 import Error from '../../ui/Error';
 import Spinner from '../../ui/Spinner';
 import Table from '../../ui/Table';
+import Pagination from '../../ui/Pagination';
 
 function Visits() {
   const [searchParams] = useSearchParams();
-  const { data: visits, error, isLoading } = useGetVisits();
+  const {
+    data: { data: visits, page },
+    error,
+    isLoading,
+  } = useGetVisits();
 
   if (isLoading) return <Spinner />;
   if (!visits) return <Error>No Visits Yet.</Error>;
@@ -39,6 +44,10 @@ function Visits() {
                     <VisitRow key={visit.created_date} visit={visit} />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={visits.length} />
+                </Table.Footer>
               </Table>
             </div>
           </>

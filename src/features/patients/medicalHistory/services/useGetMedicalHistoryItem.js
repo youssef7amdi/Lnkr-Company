@@ -12,7 +12,7 @@ export function useGetMedicalHistoryItem(query) {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['medical_history_item', id, query],
+    queryKey: ['medical_history_item', id, query, accessToken],
     queryFn: () => getMedicalHistory({ accessToken, query }),
     retry: 0,
     staleTime: 1000 * 1000,

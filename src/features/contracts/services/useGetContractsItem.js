@@ -10,7 +10,7 @@ export function useGetContractsItem(query) {
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['contracts_item', query],
+    queryKey: ['contracts_item', query, accessToken],
     queryFn: () => getContracts({ accessToken, query }),
     retry: 0,
     staleTime: 1000 * 1000,

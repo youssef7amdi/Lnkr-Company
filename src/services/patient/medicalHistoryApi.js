@@ -1,11 +1,7 @@
 import { BASE_URL } from '../../environment/environment';
 
 // Medical History
-export async function getMedicalHistory({
-  accessToken,
-  page = 1,
-  query = null,
-}) {
+export async function getMedicalHistory({ accessToken, page, query = null }) {
   const res = await fetch(
     `${BASE_URL}dentist/medical_history?page=${page}${query ? '&q=' + query : ''}`,
     {

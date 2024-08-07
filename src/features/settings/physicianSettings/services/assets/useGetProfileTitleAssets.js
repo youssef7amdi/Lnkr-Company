@@ -14,7 +14,7 @@ export function useGetProfileTitleAssets() {
     isLoading: profileTitleAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`profile_title_assets`],
+    queryKey: [`profile_title_assets`, accessToken],
     queryFn: () => getProfileTitleAssets(accessToken),
     retry: 0,
     staleTime: 1000 * 1000000,

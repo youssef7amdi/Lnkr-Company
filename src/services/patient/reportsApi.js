@@ -2,7 +2,7 @@ import { BASE_URL } from '../../environment/environment';
 
 // reports
 
-export async function getReports({ accessToken, page = 1, query = null }) {
+export async function getReports({ accessToken, page, query = null }) {
   const res = await fetch(
     `${BASE_URL}dentist/report?page=${page}${query ? '&q=' + query : ''}`,
     {

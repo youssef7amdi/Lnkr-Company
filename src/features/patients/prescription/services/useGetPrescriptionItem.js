@@ -12,7 +12,7 @@ export function useGetPrescriptionItem(query) {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['prescription_item', id, query],
+    queryKey: ['prescription_item', id, query, accessToken],
     queryFn: () => getPrescriptions({ accessToken, query }),
     retry: 0,
     staleTime: 1000 * 1000,

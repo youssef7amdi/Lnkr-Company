@@ -14,7 +14,7 @@ export function useGetScanItem(query) {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: [`scan_item_${type ? type : 'imaging'}`, id, query],
+    queryKey: [`scan_item`, id, type, query, accessToken],
     queryFn: () => getScans({ query, accessToken, type }),
     retry: 0,
     staleTime: 1000 * 1000,

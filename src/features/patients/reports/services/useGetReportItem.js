@@ -12,7 +12,7 @@ export function useGetReportItem(query) {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['report_item', id, query],
+    queryKey: ['report_item', id, query, accessToken],
     queryFn: () => getReports({ query, accessToken }),
     retry: 0,
     staleTime: 1000 * 1000,

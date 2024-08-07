@@ -10,7 +10,7 @@ export function useGetClinicAddress() {
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['clinic_address'],
+    queryKey: ['clinic_address', accessToken],
     queryFn: () => getClinicAddressInfo(accessToken),
     retry: 0,
   });

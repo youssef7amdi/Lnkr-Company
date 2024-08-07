@@ -14,7 +14,7 @@ export function useSearch(searchData) {
     isLoading: searchLoading,
     error,
   } = useQuery({
-    queryKey: ['patient', searchData.value],
+    queryKey: ['patient', searchData.value, accessToken],
     queryFn: () => searchPatient(searchData, accessToken),
     retry: 0,
   });

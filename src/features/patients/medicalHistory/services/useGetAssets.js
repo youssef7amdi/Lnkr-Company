@@ -14,14 +14,11 @@ export function useGetAssets() {
     isLoading: assetsLoading,
     error,
   } = useQuery({
-    queryKey: ['medical_assets'],
+    queryKey: ['medical_assets', accessToken],
     queryFn: () => getMedicalAssets(accessToken),
     retry: 0,
     staleTime: 1000 * 10000,
   });
-
-  // const {blood_type, marital_status} = data?.data;
-  // const blood
 
   useEffect(
     function () {

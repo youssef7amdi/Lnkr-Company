@@ -1,11 +1,7 @@
 import { BASE_URL } from '../../environment/environment';
 
 // Prescriptions
-export async function getPrescriptions({
-  accessToken,
-  page = 1,
-  query = null,
-}) {
+export async function getPrescriptions({ accessToken, page, query = null }) {
   const res = await fetch(
     `${BASE_URL}dentist/prescription?page=${page}${query ? '&q=' + query : ''}`,
     {

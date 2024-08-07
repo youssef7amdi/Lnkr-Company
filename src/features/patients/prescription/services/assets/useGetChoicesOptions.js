@@ -14,7 +14,7 @@ export function useGetChoicesOptions() {
     isLoading: choicesAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`choices_assets`],
+    queryKey: [`choices_assets`, accessToken],
     queryFn: () => getChoicesAssets(accessToken),
     retry: 0,
     staleTime: 1000 * 1000000,

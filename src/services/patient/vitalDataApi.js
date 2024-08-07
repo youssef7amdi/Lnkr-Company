@@ -1,7 +1,7 @@
 import { BASE_URL } from '../../environment/environment';
 
 // Vital Data
-export async function getVitalData({ accessToken, page = 1, query = null }) {
+export async function getVitalData({ accessToken, page, query = null }) {
   const res = await fetch(
     `${BASE_URL}dentist/vital_signs?page=${page}${query ? '&q=' + query : ''}`,
     {
@@ -15,7 +15,7 @@ export async function getVitalData({ accessToken, page = 1, query = null }) {
   if (!res.ok) throw new Error('Unable to get Vital Data');
 
   const data = await res.json();
-  console.log('Get Medical History', data);
+  console.log('Get Vital Data', data);
 
   if (!data.success) throw new Error(data.message);
 

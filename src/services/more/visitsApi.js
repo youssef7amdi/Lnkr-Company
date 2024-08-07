@@ -1,7 +1,7 @@
 import { BASE_URL } from '../../environment/environment';
 
 // Visits
-export async function getVisits({ accessToken, page = 1, query = null }) {
+export async function getVisits({ accessToken, page, query = null }) {
   const res = await fetch(
     `${BASE_URL}clinic/loggedin/visit?page=${page}${query ? '&q=' + query : ''}`,
     {

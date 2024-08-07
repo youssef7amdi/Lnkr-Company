@@ -10,11 +10,16 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import Button from '../../../ui/Button';
 import FilterWithQueries from '../../../ui/FilterWithQueries';
+import Pagination from '../../../ui/Pagination';
 
 function Labs() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { data: labs, error, isLoading } = useLabs();
+  const {
+    data: { data: labs, page, total },
+    error,
+    isLoading,
+  } = useLabs();
 
   if (isLoading) return <Spinner />;
   if (!labs) return <Error>No Labs Yet, Request Lab to show.</Error>;
@@ -56,6 +61,10 @@ function Labs() {
                   data={labs}
                   render={(lab) => <LabRow key={lab.created_date} lab={lab} />}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>

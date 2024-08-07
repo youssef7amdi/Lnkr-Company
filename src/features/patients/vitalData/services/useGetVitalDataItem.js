@@ -12,7 +12,7 @@ export function useGetVitalDataItem(query) {
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['vital_data_item', id, query],
+    queryKey: ['vital_data_item', id, query, accessToken],
     queryFn: () => getVitalData({ accessToken, query }),
     retry: 0,
     staleTime: 1000 * 1000,

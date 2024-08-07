@@ -14,7 +14,7 @@ export function useGetAddressAssets(city) {
     isLoading: addressAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`address_assets${city ? '_city' : ''}`, city],
+    queryKey: [`address_assets${city ? '_city' : ''}`, city, accessToken],
     queryFn: () => getClinicAddressAssets({ city, accessToken }),
     retry: 0,
     staleTime: 1000 * 1000000,

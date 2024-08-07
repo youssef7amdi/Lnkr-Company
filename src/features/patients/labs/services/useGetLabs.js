@@ -1,24 +1,54 @@
 import { useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useCookiesAccess } from '../../../../contexts/CookiesAccessProvider';
 
 import { getLabs } from '../../../../services/patient/labsApi';
 
 export function useLabs() {
+  const queryClient = useQueryClient();
   const { getCookie, removeCookie } = useCookiesAccess();
   const accessToken = getCookie('access_token');
   const [searchParams] = useSearchParams();
-  const type = searchParams.get('type');
+  const type = searchParams.get('type') ? searchParams.get('type') : 'result';
+
+  const pageNumber = !searchParams.get('page')
+    ? 1
+    : Number(searchParams.get('page'));
+
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: [`labs_${type ? type : 'result'}`, id],
-    queryFn: () => getLabs({ accessToken, type: type ? type : 'result' }),
+    queryKey: [`labs`, pageNumber, id, type, accessToken],
+    queryFn: () => getLabs({ accessToken, type, page: pageNumber }),
     retry: 0,
     staleTime: 1000 * 10,
   });
+
+  // Pre Fetching Query
+  if (pageNumber < data?.page?.pages)
+    queryClient.prefetchQuery({
+      queryKey: ['labs', pageNumber + 1, id, type, accessToken],
+      queryFn: () =>
+        getLabs({
+          accessToken,
+          type,
+          page: pageNumber + 1,
+        }),
+      staleTime: 10 * 1000,
+    });
+  if (pageNumber > 1)
+    queryClient.prefetchQuery({
+      queryKey: ['labs', pageNumber - 1, id, type, accessToken],
+      queryFn: () =>
+        getLabs({
+          accessToken,
+          type,
+          page: pageNumber - 1,
+        }),
+      staleTime: 10 * 1000,
+    });
 
   useEffect(
     function () {
@@ -33,5 +63,5 @@ export function useLabs() {
     [error, removeCookie],
   );
 
-  return { data: data ? data.data : [], error, isLoading };
+  return { data: data ? data : [], error, isLoading };
 }

@@ -10,10 +10,15 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import AddNewModal from '../../../ui/AddNewModal';
 import AddReportForm from './AddReportForm';
+import Pagination from '../../../ui/Pagination';
 
 function Reports() {
   const [searchParams] = useSearchParams();
-  const { data: reports, error, isLoading } = useReports();
+  const {
+    data: { data: reports, page, total },
+    error,
+    isLoading,
+  } = useReports();
 
   if (isLoading) return <Spinner />;
   if (!reports) return <Error>No Reports Yet, Add Report to show.</Error>;
@@ -44,6 +49,10 @@ function Reports() {
                     <ReportRow key={report.created_date} report={report} />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>

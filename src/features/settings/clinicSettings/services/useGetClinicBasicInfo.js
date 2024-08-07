@@ -10,7 +10,7 @@ export function useGetClinicBasicInfo() {
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['clinic_basicInfo'],
+    queryKey: ['clinic_basicInfo', accessToken],
     queryFn: () => getClinicBasicInfo(accessToken),
     retry: 0,
   });

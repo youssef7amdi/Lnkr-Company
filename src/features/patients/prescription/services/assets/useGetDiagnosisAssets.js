@@ -14,7 +14,11 @@ export function useGetDiagnosisAssets(category) {
     isLoading: diagnosisAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`diagnosis_assets${category ? '_category' : ''}`, category],
+    queryKey: [
+      `diagnosis_assets${category ? '_category' : ''}`,
+      category,
+      accessToken,
+    ],
     queryFn: () => getDiagnosisAssets({ category, accessToken }),
     retry: 0,
     staleTime: 1000 * 1000000,

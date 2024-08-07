@@ -14,7 +14,11 @@ export function useGetLabAssets(category) {
     isLoading: labAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`lab_assets${category ? '_category' : ''}`, category],
+    queryKey: [
+      `lab_assets${category ? '_category' : ''}`,
+      category,
+      accessToken,
+    ],
     queryFn: () => getLabAssets({ category, accessToken }),
     retry: 0,
     staleTime: 1000 * 10000,

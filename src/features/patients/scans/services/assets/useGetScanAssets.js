@@ -14,7 +14,11 @@ export function useGetScanAssets(category) {
     isLoading: scanAssetsLoading,
     error,
   } = useQuery({
-    queryKey: [`scan_assets${category ? '_category' : ''}`, category],
+    queryKey: [
+      `scan_assets${category ? '_category' : ''}`,
+      category,
+      accessToken,
+    ],
     queryFn: () => getScanAssets({ category, accessToken }),
     retry: 0,
     staleTime: 1000 * 10000,

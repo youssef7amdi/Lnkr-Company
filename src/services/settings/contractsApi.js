@@ -1,7 +1,7 @@
 import { BASE_URL } from '../../environment/environment';
 
 // Contracts
-export async function getContracts({ accessToken, page = 1, query = null }) {
+export async function getContracts({ accessToken, page, query = null }) {
   const res = await fetch(
     `${BASE_URL}clinic/loggedin/pricing?page=${page}${query ? '&q=' + query : ''}`,
     {

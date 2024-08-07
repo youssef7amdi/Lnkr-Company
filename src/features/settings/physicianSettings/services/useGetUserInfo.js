@@ -10,7 +10,7 @@ export function useGetUserInfo() {
   const accessToken = getCookie('access_token');
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['physician_userInfo'],
+    queryKey: ['physician_userInfo', accessToken],
     queryFn: () => getUserInfo(accessToken),
     retry: 0,
   });

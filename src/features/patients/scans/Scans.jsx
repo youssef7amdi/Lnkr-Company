@@ -10,11 +10,16 @@ import Spinner from '../../../ui/Spinner';
 import Table from '../../../ui/Table';
 import Button from '../../../ui/Button';
 import FilterWithQueries from '../../../ui/FilterWithQueries';
+import Pagination from '../../../ui/Pagination';
 
 function Scans() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { data: scans, error, isLoading } = useScans();
+  const {
+    data: { data: scans, page, total },
+    error,
+    isLoading,
+  } = useScans();
 
   if (isLoading) return <Spinner />;
   if (!scans) return <Error>No Scans Yet, Request Scan to show.</Error>;
@@ -58,6 +63,10 @@ function Scans() {
                     <ScanRow key={scan.created_date} scan={scan} />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>

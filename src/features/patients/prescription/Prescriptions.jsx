@@ -10,11 +10,16 @@ import Table from '../../../ui/Table';
 import Spinner from '../../../ui/Spinner';
 import Tag from '../../../ui/Tag';
 import Button from '../../../ui/Button';
+import Pagination from '../../../ui/Pagination';
 
 function Prescriptions() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { data: prescriptions, error, isLoading } = useGetPrescriptions();
+  const {
+    data: { data: prescriptions, page, total },
+    error,
+    isLoading,
+  } = useGetPrescriptions();
 
   if (isLoading) return <Spinner />;
   if (!prescriptions)
@@ -54,6 +59,10 @@ function Prescriptions() {
                     />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>

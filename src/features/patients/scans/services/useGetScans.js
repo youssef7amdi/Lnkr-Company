@@ -1,24 +1,59 @@
 import { useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useCookiesAccess } from '../../../../contexts/CookiesAccessProvider';
 
 import { getScans } from '../../../../services/patient/scansApi';
 
 export function useScans() {
+  const queryClient = useQueryClient();
   const { getCookie, removeCookie } = useCookiesAccess();
   const accessToken = getCookie('access_token');
   const [searchParams] = useSearchParams();
-  const type = searchParams.get('type');
+  const type = searchParams.get('type') ? searchParams.get('type') : 'imaging';
+
+  const pageNumber = !searchParams.get('page')
+    ? 1
+    : Number(searchParams.get('page'));
+
   const { id } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: [`scans_${type ? type : 'imaging'}`, id],
-    queryFn: () => getScans({ accessToken, type: type ? type : 'imaging' }),
+    queryKey: [`scans`, pageNumber, id, type, accessToken],
+    queryFn: () =>
+      getScans({
+        accessToken,
+        type,
+        page: pageNumber,
+      }),
     retry: 0,
     staleTime: 1000 * 10,
   });
+
+  // Pre Fetching Query
+  if (pageNumber < data?.page?.pages)
+    queryClient.prefetchQuery({
+      queryKey: ['scans', pageNumber + 1, id, type, accessToken],
+      queryFn: () =>
+        getScans({
+          accessToken,
+          type,
+          page: pageNumber + 1,
+        }),
+      staleTime: 10 * 1000,
+    });
+  if (pageNumber > 1)
+    queryClient.prefetchQuery({
+      queryKey: ['scans', pageNumber - 1, id, type, accessToken],
+      queryFn: () =>
+        getScans({
+          accessToken,
+          type,
+          page: pageNumber - 1,
+        }),
+      staleTime: 10 * 1000,
+    });
 
   useEffect(
     function () {
@@ -33,5 +68,5 @@ export function useScans() {
     [error, removeCookie],
   );
 
-  return { data: data ? data.data : [], error, isLoading };
+  return { data: data ? data : [], error, isLoading };
 }

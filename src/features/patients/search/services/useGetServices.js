@@ -4,9 +4,12 @@ import { useEffect } from 'react';
 import { useCookiesAccess } from '../../../../contexts/CookiesAccessProvider';
 
 import { getServices } from '../../../../services/patient/searchApi';
+import { useSearchParams } from 'react-router-dom';
 
 export function useGetServices() {
   const { getCookie, removeCookie } = useCookiesAccess();
+  const [searchParams] = useSearchParams();
+  const mobile = searchParams.get('mobile');
   const accessToken = getCookie('access_token');
 
   const {
@@ -14,7 +17,7 @@ export function useGetServices() {
     isLoading: servicesLoading,
     error,
   } = useQuery({
-    queryKey: ['services'],
+    queryKey: ['services', mobile, accessToken],
     queryFn: () => getServices(accessToken),
     retry: 0,
   });

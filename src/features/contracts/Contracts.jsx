@@ -8,10 +8,15 @@ import DataShowingLayout from '../../ui/DataShowingLayout';
 import Error from '../../ui/Error';
 import Spinner from '../../ui/Spinner';
 import Table from '../../ui/Table';
+import Pagination from '../../ui/Pagination';
 
 function Contracts() {
   const [searchParams] = useSearchParams();
-  const { data: contracts, error, isLoading } = useGetContracts();
+  const {
+    data: { data: contracts, page, total },
+    error,
+    isLoading,
+  } = useGetContracts();
 
   if (isLoading) return <Spinner />;
   if (!contracts) return <Error>No Contracts Yet.</Error>;
@@ -38,6 +43,10 @@ function Contracts() {
                     <ContractRow key={contract.uuid} contract={contract} />
                   )}
                 />
+
+                <Table.Footer>
+                  <Pagination page={page} total={total} />
+                </Table.Footer>
               </Table>
             </div>
           </>
